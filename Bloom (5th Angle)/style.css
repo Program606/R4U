@@ -1,0 +1,30 @@
+body {
+    padding: 20px;
+  }
+  
+  .panel-heading {
+    cursor: pointer;
+  }
+  
+  .category-icon {
+    margin-right: 10px;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar-group input {
+    flex: 1;
+  }
+  
