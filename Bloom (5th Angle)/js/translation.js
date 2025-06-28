@@ -1,6 +1,4 @@
-// Google Translate API v3beta1 implementation
-const API_KEY = 'AIzaSyDz7Bo4FkaqPT1wLQUffPgWp30yHjhA6Pk'; // Replace with your actual API key
-const PROJECT_ID = 'lustrous-center-464218-s4'; // Replace with your Google Cloud project ID
+
 
 async function translateText(text, targetLanguage) {
   // if empty text
