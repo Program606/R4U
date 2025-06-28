@@ -1,5 +1,11 @@
-import { translate } from '@vitalets/google-translate-api';
+import { translatePage } from './translation.js';
 
-const { text } = await translate('Mabaho Kayo', { to: 'en' });
-
-console.log(text) // => 'Hello World! How are you?'
+document.querySelector("select#language").addEventListener("change", async function(e){
+    e.preventDefault();
+    const language = this.value;
+    try {
+        await translatePage(language);
+    } catch (error) {
+        console.error('Translation failed:', error);
+    }
+});
