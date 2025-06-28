@@ -170,7 +170,7 @@ function populate(){
 }
 function setUpTable(category, data){
   
-  const table = document.createElement("table");
+  const table = document.createElement("table"); 
   const tableHead = document.createElement("thead");
   const tableBody = document.createElement("tbody");
 
@@ -185,7 +185,7 @@ function setUpTable(category, data){
   }
 }
 function createTableRows(value, tableBody){
-  let tableRow =document.createElement("tr");
+  let tableRow = document.createElement("tr");
 
   let tableName = document.createElement("td");
   let tableDescription = document.createElement("td");

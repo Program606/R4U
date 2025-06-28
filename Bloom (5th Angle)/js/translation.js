@@ -1,19 +1,16 @@
-
+const API_KEY = "";
 
 async function translateText(text, targetLanguage) {
   // if empty text
-  if (!text || !text.trim()) {
+  if (!text) {
     console.log('Skipping empty text translation');
     return text;
   }
   
-  // // Don't translate if target language is English (source language)
-  // if (targetLanguage === 'en') {
-  //   console.log('Skipping translation to English (source language)');
-  //   return text;
-  // }
-  
-  console.log(`Translating: "${text}" to ${targetLanguage}`);
+  if (targetLanguage === 'en') {
+    console.log('Setting text to Default, no translation needed');
+   
+  }
   
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
   
@@ -52,10 +49,7 @@ export async function translatePage(lang) {
   ];
 
   const panelSelectors = [
-    { selector: '#collapseHousing', text: 'HOUSING' },
-    { selector: '#collapseClothing', text: 'CLOTHING' },
-    { selector: '#collapseFood', text: 'FOOD' },
-    { selector: '#collapseTransport', text: 'TRANSPORTATION' }
+    'Housing' ,'Clothing','Food' ,'Transport' 
   ];
 
   // Translate main elements
@@ -75,25 +69,13 @@ export async function translatePage(lang) {
   }
 
   // Translate panel titles
-  for (let i = 0; i < panelSelectors.length; i++) {
-    const panel = panelSelectors[i];
-    const heading = document.querySelectorAll('.panel-title')[i];
-    if (heading) {
-      const icon = heading.querySelector('.category-icon');
-      if (icon && icon.nextSibling) {
-        const translatedText = await translateText(panel.text, lang);
-        icon.nextSibling.textContent = ' ' + translatedText + ' ';
-      }
-    }
+  let categoryTitles = document.querySelectorAll(".categoryText");
+  for (let i=0; i < categoryTitles.length; i++) {
+    categoryTitles[i].textContent = await translateText(panelSelectors[i], lang);
   }
-
   // Translate table headers for all categories
-  const tableHeaders = document.querySelectorAll('table thead th');
+  const tableHeaders = document.querySelectorAll('table th, table td');
   for (let i = 0; i < tableHeaders.length; i++) {
-    const headerText = tableHeaders[i].textContent.trim();
-    if (headerText) {
-      const translatedText = await translateText(headerText, lang);
-      tableHeaders[i].textContent = translatedText;
-    }
+    tableHeaders[i].textContent = await translateText(tableHeaders[i].textContent, lang);
   }
 }
