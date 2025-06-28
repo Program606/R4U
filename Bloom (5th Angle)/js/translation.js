@@ -1,4 +1,28 @@
-const API_KEY = "";
+const API_KEY = "AIzaSyBewBR7xqmX4dbeeTMTMr7jD8Z2kteOH2U";
+import { housingData, clothingData, foodData, transportationData } from "../data/data.js";
+
+
+// Store original English text for each element
+const originalTexts = {
+  searchBtn: 'Search',
+  searchInput: 'Search...',
+  housing: 'Housing',
+  clothing: 'Clothing', 
+  food: 'Food',
+  transport: 'Transport',
+  orgName: 'Organization Name',
+  description: 'Description',
+  linkContact: 'Link/Contact',
+  resource: 'Resource'
+};
+
+// Store original data arrays for translation
+const originalData = {
+  housing: housingData,
+  clothing: clothingData,
+  food: foodData,
+  transport: transportationData
+};
 
 async function translateText(text, targetLanguage) {
   // if empty text
@@ -9,7 +33,7 @@ async function translateText(text, targetLanguage) {
   
   if (targetLanguage === 'en') {
     console.log('Setting text to Default, no translation needed');
-   
+    return text;
   }
   
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
@@ -42,22 +66,50 @@ async function translateText(text, targetLanguage) {
   }
 }
 
+// Function to translate table content using original data
+async function translateTableContent(lang) {
+  const categories = ['housing', 'clothing', 'food', 'transport'];
+  
+  for (const category of categories) {
+    const tableNames = document.querySelectorAll(`#collapse${category.charAt(0).toUpperCase() + category.slice(1)} .tableName`);
+    const tableDescriptions = document.querySelectorAll(`#collapse${category.charAt(0).toUpperCase() + category.slice(1)} .tableDescription`);
+    
+    const categoryData = originalData[category];
+    
+    // Translate table names and descriptions using original data
+    for (let i = 0; i < tableNames.length && i < categoryData.length; i++) {
+      if (tableNames[i]) {
+        const originalName = categoryData[i].name;
+        tableNames[i].textContent = await translateText(originalName, lang);
+      }
+      
+      if (tableDescriptions[i]) {
+        const originalDescription = categoryData[i].description;
+        tableDescriptions[i].textContent = await translateText(originalDescription, lang);
+      }
+    }
+  }
+}
+
 export async function translatePage(lang) {
   const elementsToTranslate = [
-    // { selector: '.top-bar h2', property: 'textContent' },
-    { selector: '#searchInput', property: 'placeholder' }
+    { selector: '#searchBtn', property: 'textContent', originalKey: 'searchBtn' },
+    { selector: '#searchInput', property: 'placeholder', originalKey: 'searchInput' }
   ];
 
   const panelSelectors = [
-    'Housing' ,'Clothing','Food' ,'Transport' 
+    { text: 'Housing', originalKey: 'housing' },
+    { text: 'Clothing', originalKey: 'clothing' },
+    { text: 'Food', originalKey: 'food' },
+    { text: 'Transport', originalKey: 'transport' }
   ];
 
-  // Translate main elements
+  // Translate main elements using original English text
   for (const element of elementsToTranslate) {
     const el = document.querySelector(element.selector);
     if (el) {
-      const originalText = element.property === 'textContent' ? el.textContent : el.placeholder;
-      if (originalText && originalText.trim()) {
+      const originalText = originalTexts[element.originalKey];
+      if (originalText) {
         const translatedText = await translateText(originalText, lang);
         if (element.property === 'textContent') {
           el.textContent = translatedText;
@@ -68,14 +120,24 @@ export async function translatePage(lang) {
     }
   }
 
-  // Translate panel titles
+  // Translate panel titles using original English text
   let categoryTitles = document.querySelectorAll(".categoryText");
-  for (let i=0; i < categoryTitles.length; i++) {
-    categoryTitles[i].textContent = await translateText(panelSelectors[i], lang);
+  for (let i = 0; i < categoryTitles.length; i++) {
+    const originalText = originalTexts[panelSelectors[i].originalKey];
+    categoryTitles[i].textContent = await translateText(originalText, lang);
   }
-  // Translate table headers for all categories
-  const tableHeaders = document.querySelectorAll('table th, table td');
+
+  // Translate table headers using original English text
+  const tableHeaders = document.querySelectorAll('table th');
+  const headerKeys = ['orgName', 'description', 'linkContact', 'resource'];
+  
   for (let i = 0; i < tableHeaders.length; i++) {
-    tableHeaders[i].textContent = await translateText(tableHeaders[i].textContent, lang);
+    if (headerKeys[i]) {
+      const originalText = originalTexts[headerKeys[i]];
+      tableHeaders[i].textContent = await translateText(originalText, lang);
+    }
   }
+
+  // Translate table content using original data
+  await translateTableContent(lang);
 }
