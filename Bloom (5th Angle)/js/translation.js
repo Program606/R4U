@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyBewBR7xqmX4dbeeTMTMr7jD8Z2kteOH2U";
+const API_KEY = "";
 import { housingData, clothingData, foodData, transportationData } from "../data/data.js";
 
 
