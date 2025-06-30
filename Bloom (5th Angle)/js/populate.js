@@ -1,4 +1,4 @@
-import { housingData, clothingData, foodData, transportationData } from "../data/data.js";
+import { housingData, clothingData, foodData, transportationData, languageData } from "../data/data.js";
 
 const tableColumns = 
   [ "Organization Name",
@@ -10,16 +10,18 @@ const tableColumns =
 populate();
 
 function populate(){
+
   let housing = document.querySelector("#collapseHousing div.panel-body");
   let clothing = document.querySelector("#collapseClothing div.panel-body");
   let food = document.querySelector("#collapseFood div.panel-body");
   let transportation = document.querySelector("#collapseTransport div.panel-body");
+  let languageForm = document.querySelector("div.top-bar");
 
+  populateLangOptions(languageForm);
   setUpTable(housing, housingData);
   setUpTable(clothing, clothingData);
   setUpTable(food, foodData);
   setUpTable(transportation, transportationData);
-  
 }
 function setUpTable(category, data){
   
@@ -69,3 +71,33 @@ function createTableHeader(tableHead){
     tableHead.appendChild(headerRow);
   });
 };
+function populateLangOptions(htmlLocation) {
+  const form = document.createElement("form");
+  htmlLocation.appendChild(form);
+  form.setAttribute("action", "./index.html");  
+  form.setAttribute("method", "get");
+  form.setAttribute("id", "languageForm");
+
+  const label = document.createElement("label");
+  label.setAttribute("for", "language");  
+  label.textContent = "Choose Language:";
+  form.appendChild(label);
+
+  const select = document.createElement("select");
+  select.setAttribute("id", "language");
+  select.setAttribute("name", "language");
+  select.classList.add("form-control");
+  form.appendChild(select);
+
+  for (const lang of languageData) {
+    const option = document.createElement("option");
+    option.setAttribute("value", lang.langCode);
+    option.textContent = lang.language;
+    select.appendChild(option);
+
+    if(lang.langCode === "en") {
+      option.selected = true; // Set English as the default selected language
+    }
+  }
+  form.appendChild(select);
+}
