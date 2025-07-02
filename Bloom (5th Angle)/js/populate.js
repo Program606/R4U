@@ -1,42 +1,86 @@
-import { housingData, clothingData, foodData, transportationData, languageData } from "../data/data.js";
+import * as util from "../data/data.js";
 
 const tableColumns = 
   [ "Organization Name",
     "Description",
     "Link/Contact",
     "Resource"
-]
+  ]
 
 populate();
 
 function populate(){
 
-  let housing = document.querySelector("#collapseHousing div.panel-body");
-  let clothing = document.querySelector("#collapseClothing div.panel-body");
-  let food = document.querySelector("#collapseFood div.panel-body");
-  let transportation = document.querySelector("#collapseTransport div.panel-body");
+  populateCategories();
   let languageForm = document.querySelector("div.top-bar");
-
   populateLangOptions(languageForm);
-  setUpTable(housing, housingData);
-  setUpTable(clothing, clothingData);
-  setUpTable(food, foodData);
-  setUpTable(transportation, transportationData);
+
+  let categoryCards = document.querySelectorAll("div.panel-body");
+
+  for(let i=0;i < categoryCards.length; i++){
+    let entry = util.categoryData[i];
+    if (!entry) {
+      console.warn(`No data for category index ${i+1}`);
+      continue;
+    }
+    setUpTable(categoryCards[i], entry.data);
+  }
 }
-function setUpTable(category, data){
+function populateCategories(){
+  let location = document.querySelector("div.search-bar-group").nextElementSibling;
+
+  for(let category of util.categoryData){
+    let panelDefault = document.createElement("div");
+    panelDefault.classList = "panel panel-default";
+    location.appendChild(panelDefault);
+
+
+    let panelHeading = document.createElement("div");
+    panelHeading.classList.add("panel-heading");
+    panelHeading.setAttribute("data-toggle", "collapse");
+    panelHeading.setAttribute("href", `#collapse${(category.text).replace(/[\s'"\/]+/g, '')}`);
+
+    panelDefault.appendChild(panelHeading);
+    let h4 = document.createElement("h4");
+    h4.classList.add("panel-title");
+    panelHeading.appendChild(h4)
+
+    let icon = document.createElement("span");
+    icon.classList = "glyphicon glyphicon-shopping-cart category-icon";
+    let categoryText = document.createElement("span");
+    categoryText.classList.add("categoryText");
+    categoryText.textContent = (category.text).toUpperCase();
+    let plusIcon = document.createElement("span");
+    plusIcon.classList = "pull-right toggle-icon glyphicon glyphicon-plus";
+
+    h4.appendChild(icon);
+    h4.appendChild(categoryText);
+    h4.appendChild(plusIcon);
+
+    let collapse = document.createElement("div");
+    collapse.setAttribute("id", `collapse${(category.text.replace(/[\s'"\/]+/g, ''))}`);
+    collapse.classList = "panel-collapse collapse";
+    panelDefault.appendChild(collapse);
+
+    let panelBody = document.createElement("div");
+    panelBody.classList.add("panel-body");
+    collapse.appendChild(panelBody);
+  }
+}
+function setUpTable(locator, data){
   
   const table = document.createElement("table"); 
   const tableHead = document.createElement("thead");
   const tableBody = document.createElement("tbody");
 
-  category.appendChild(table);
+  locator.appendChild(table);
   table.appendChild(tableHead);
   table.appendChild(tableBody);
 
   createTableHeader(tableHead);
 
-  for (const [key, value] of Object.entries(data)) {
-    createTableRows(value, tableBody);
+  for (let entry of data) {
+    createTableRows(entry, tableBody);
   }
 }
 function createTableRows(value, tableBody){
@@ -89,7 +133,7 @@ function populateLangOptions(htmlLocation) {
   select.classList.add("form-control");
   form.appendChild(select);
 
-  for (const lang of languageData) {
+  for (const lang of util.languageData) {
     const option = document.createElement("option");
     option.setAttribute("value", lang.langCode);
     option.textContent = lang.language;

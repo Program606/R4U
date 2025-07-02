@@ -114,7 +114,8 @@ export const foodData = [
     resource: "https://mindcare.net/resources"
   }
 ];
-export const transportationData = [
+
+export const transportData = [
   {
     name: "Open Health Alliance",
     description: "Non-profit focused on global public health education.",
@@ -140,6 +141,106 @@ export const transportationData = [
     resource: "https://mindcare.net/resources"
   }
 ];
+
+export const incomeSupportData = [
+  {
+    name: "Basic Income Hub",
+    description: "Assists residents in applying for income support programs.",
+    contact: "support@incomehub.net",
+    resource: "https://incomehub.net/resources"
+  }
+];
+
+export const tenantsRightsData = [
+  {
+    name: "Rent Rights Network",
+    description: "Legal and financial help for tenants facing housing instability.",
+    contact: "legal@rentrn.org",
+    resource: "https://rentrn.org/help"
+  }
+];
+
+export const englishClassesData = [
+  {
+    name: "Community ESL",
+    description: "Free English language classes for immigrants and refugees.",
+    contact: "classes@communesl.ca",
+    resource: "https://communesl.ca/register"
+  }
+];
+
+export const jobSupportData = [
+  {
+    name: "WorkLaunch",
+    description: "Job readiness training and employment placement services.",
+    contact: "jobs@worklaunch.org",
+    resource: "https://worklaunch.org/apply"
+  }
+];
+
+export const refugeeSupportData = [
+  {
+    name: "Refugee Link",
+    description: "Helps newcomers find essential services and community support.",
+    contact: "refugeesupport@refugeelink.net",
+    resource: "https://refugeelink.net/guide"
+  }
+];
+
+export const pregnancyData = [
+  {
+    name: "MomsFirst",
+    description: "Resources for prenatal care and infant wellness.",
+    contact: "hello@momsfirst.org",
+    resource: "https://momsfirst.org/babies"
+  }
+];
+
+export const disabilityData = [
+  {
+    name: "AccessAbility",
+    description: "Support services for individuals with physical and mental disabilities.",
+    contact: "info@accessability.ca",
+    resource: "https://accessability.ca/services"
+  }
+];
+
+export const legalSupportData = [
+  {
+    name: "JusticeNow",
+    description: "Legal aid and advocacy for underrepresented communities.",
+    contact: "support@justicenow.org",
+    resource: "https://justicenow.org/help"
+  }
+];
+
+export const mentalHealthData = [
+  {
+    name: "FaithCare",
+    description: "Mental health support with spiritual guidance.",
+    contact: "care@faithcare.org",
+    resource: "https://faithcare.org/services"
+  }
+];
+
+export const crisisSupportData = [
+  {
+    name: "CrisisConnect",
+    description: "24/7 support for individuals in emotional or physical crisis.",
+    contact: "help@crisisconnect.net",
+    resource: "https://crisisconnect.net/urgent"
+  }
+];
+
+export const contactData = [
+  {
+    name: "ReachOut Contact",
+    description: "Community support and navigation assistance.",
+    contact: "contact@reachout.org",
+    resource: "https://reachout.org/connect"
+  }
+];
+
 export const languageData = [
   { language: "Аҧсуа бызшәа", langCode: "ab" },        // Abkhaz
   { language: "Bahasa Acèh", langCode: "ace" },          // Acehnese
@@ -225,3 +326,24 @@ export const languageData = [
   { language: "Tiếng Việt", langCode: "vi" },         // Vietnamese
   { language: "中文 (繁體)", langCode: "zh-TW" }       // Chinese (Traditional) duplicate lang code
 ];
+
+export const categoryData = [
+  { text: "Housing", data: housingData },
+  { text: "Clothing", data: clothingData },
+  { text: "Food", data: foodData },
+  { text: "Transportation", data: transportData },
+  { text: "Income Support", data: incomeSupportData },
+  { text: "Tenants Rights / Rent Help", data: tenantsRightsData },
+  { text: "English Classes", data: englishClassesData },
+  { text: "Job Support Programs", data: jobSupportData },
+  { text: "Refugee Support", data: refugeeSupportData },
+  { text: "Pregnancy and Baby", data: pregnancyData },
+  { text: "Disability", data: disabilityData },
+  { text: "Legal Support", data: legalSupportData },
+  { text: "Spiritual / Mental Health Support", data: mentalHealthData },
+  { text: "Emergency / Crisis Support", data: crisisSupportData },
+  { text: "Contact", data: contactData }
+];
+
+
+

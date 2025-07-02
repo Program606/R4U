@@ -1,6 +1,5 @@
 const API_KEY = "";
-import { housingData, clothingData, foodData, transportationData } from "../data/data.js";
-
+import * as util from "../data/data.js";
 
 // Store original English text for each element
 const originalTexts = {
@@ -15,14 +14,23 @@ const originalTexts = {
   linkContact: 'Link/Contact',
   resource: 'Resource'
 };
+for(let entry of util.categoryData){
+  originalTexts[entry.text] = entry.text;
+}
+console.log("This is originalText "+originalTexts);
 
 // Store original data arrays for translation
 const originalData = {
-  housing: housingData,
-  clothing: clothingData,
-  food: foodData,
-  transport: transportationData
+  housing: util.housingData,
+  clothing: util.clothingData,
+  food: util.foodData,
+  transport: util.transportData
 };
+
+for(let entry of util.categoryData){
+  originalData[entry.text] = entry.data;
+}
+console.log("This is originalData "+ originalData);
 
 async function translateText(text, targetLanguage) {
   // if empty text
@@ -103,6 +111,9 @@ export async function translatePage(lang) {
     { text: 'Food', originalKey: 'food' },
     { text: 'Transport', originalKey: 'transport' }
   ];
+  for(let entry of panelSelectors){
+    panelSelectors.push(text, `${entry.text}`, originalKey, `${entry.text}`)
+  }
 
   // Translate main elements using original English text
   for (const element of elementsToTranslate) {
