@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "AIzaSyBewBR7xqmX4dbeeTMTMr7jD8Z2kteOH2U";
 import * as util from "../data/data.js";
 
 // Store original English text for each element
@@ -105,16 +105,6 @@ export async function translatePage(lang) {
     { selector: '#searchInput', property: 'placeholder', originalKey: 'searchInput' }
   ];
 
-  const panelSelectors = [
-    { text: 'Housing', originalKey: 'housing' },
-    { text: 'Clothing', originalKey: 'clothing' },
-    { text: 'Food', originalKey: 'food' },
-    { text: 'Transport', originalKey: 'transport' }
-  ];
-  for(let entry of panelSelectors){
-    panelSelectors.push(text, `${entry.text}`, originalKey, `${entry.text}`)
-  }
-
   // Translate main elements using original English text
   for (const element of elementsToTranslate) {
     const el = document.querySelector(element.selector);
@@ -134,7 +124,7 @@ export async function translatePage(lang) {
   // Translate panel titles using original English text
   let categoryTitles = document.querySelectorAll(".categoryText");
   for (let i = 0; i < categoryTitles.length; i++) {
-    const originalText = originalTexts[panelSelectors[i].originalKey];
+    const originalText = util.categoryData[i].text;
     categoryTitles[i].textContent = await translateText(originalText, lang);
   }
 
