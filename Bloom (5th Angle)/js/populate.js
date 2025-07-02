@@ -1,11 +1,12 @@
 import * as util from "../data/data.js";
+import {originalTexts} from "../js/translation.js"
 
-const tableColumns = 
-  [ "Organization Name",
-    "Description",
-    "Link/Contact",
-    "Resource"
-  ]
+const tableColumns = [
+  originalTexts["orgName"],
+  originalTexts["description"],
+  originalTexts["linkContact"],
+  originalTexts["resource"]
+]
 
 populate();
 
@@ -58,7 +59,7 @@ function populateCategories(){
     h4.appendChild(plusIcon);
 
     let collapse = document.createElement("div");
-    collapse.setAttribute("id", `collapse${(category.text.replace(/[\s'"\/]+/g, ''))}`);
+    collapse.setAttribute("id", `collapse${(category.text.replace(/[\s\/\\]+/g, ''))}`);
     collapse.classList = "panel-collapse collapse";
     panelDefault.appendChild(collapse);
 

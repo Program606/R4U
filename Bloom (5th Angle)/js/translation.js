@@ -1,36 +1,29 @@
-const API_KEY = "AIzaSyBewBR7xqmX4dbeeTMTMr7jD8Z2kteOH2U";
+const API_KEY = "";
 import * as util from "../data/data.js";
 
 // Store original English text for each element
-const originalTexts = {
+export const originalTexts = {
   searchBtn: 'Search',
   searchInput: 'Search...',
-  housing: 'Housing',
-  clothing: 'Clothing', 
-  food: 'Food',
-  transport: 'Transport',
-  orgName: 'Organization Name',
-  description: 'Description',
-  linkContact: 'Link/Contact',
-  resource: 'Resource'
+  orgName: "Organization Name",
+  description: "Description",
+  linkContact: "Link/Contact",
+  resource: "Resource"
 };
 for(let entry of util.categoryData){
   originalTexts[entry.text] = entry.text;
 }
-console.log("This is originalText "+originalTexts);
+// console.log(Object.entries(originalTexts))
 
 // Store original data arrays for translation
 const originalData = {
-  housing: util.housingData,
-  clothing: util.clothingData,
-  food: util.foodData,
-  transport: util.transportData
 };
 
 for(let entry of util.categoryData){
-  originalData[entry.text] = entry.data;
+  originalData[entry.text.replace(/[\s\/\\]+/g, '')] = entry.data;
 }
-console.log("This is originalData "+ originalData);
+
+console.log("Original Data "+Object.keys(originalData));
 
 async function translateText(text, targetLanguage) {
   // if empty text
@@ -74,23 +67,18 @@ async function translateText(text, targetLanguage) {
   }
 }
 
-// Function to translate table content using original data
 async function translateTableContent(lang) {
-  const categories = ['housing', 'clothing', 'food', 'transport'];
-  
-  for (const category of categories) {
-    const tableNames = document.querySelectorAll(`#collapse${category.charAt(0).toUpperCase() + category.slice(1)} .tableName`);
-    const tableDescriptions = document.querySelectorAll(`#collapse${category.charAt(0).toUpperCase() + category.slice(1)} .tableDescription`);
-    
-    const categoryData = originalData[category];
-    
-    // Translate table names and descriptions using original data
+  for (const entry of util.categoryData) {
+    const id = `collapse${entry.text.replace(/[\s'"\/]+/g, '')}`;
+    const tableNames = document.querySelectorAll(`#${id} .tableName`);
+    const tableDescriptions = document.querySelectorAll(`#${id} .tableDescription`);
+    const categoryData = entry.data;
+
     for (let i = 0; i < tableNames.length && i < categoryData.length; i++) {
       if (tableNames[i]) {
         const originalName = categoryData[i].name;
         tableNames[i].textContent = await translateText(originalName, lang);
       }
-      
       if (tableDescriptions[i]) {
         const originalDescription = categoryData[i].description;
         tableDescriptions[i].textContent = await translateText(originalDescription, lang);
@@ -128,14 +116,14 @@ export async function translatePage(lang) {
     categoryTitles[i].textContent = await translateText(originalText, lang);
   }
 
-  // Translate table headers using original English text
-  const tableHeaders = document.querySelectorAll('table th');
-  const headerKeys = ['orgName', 'description', 'linkContact', 'resource'];
-  
-  for (let i = 0; i < tableHeaders.length; i++) {
-    if (headerKeys[i]) {
-      const originalText = originalTexts[headerKeys[i]];
-      tableHeaders[i].textContent = await translateText(originalText, lang);
+  //Translates first two columns of each table
+  const headerKeys = ['orgName', 'description'];
+  const allTables = document.querySelectorAll('table');
+  for (const table of allTables) {
+    const ths = table.querySelectorAll('th');
+    for (let i = 0; i < ths.length && i < headerKeys.length; i++) {
+        const originalText = originalTexts[headerKeys[i]];
+        ths[i].textContent = await translateText(originalText, lang);
     }
   }
 
