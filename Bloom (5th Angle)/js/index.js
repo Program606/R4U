@@ -16,12 +16,15 @@ $('.panel-collapse').on('shown.bs.collapse', function () {
       .addClass('glyphicon-minus');
   });
 
-  $('.panel-collapse').on('hidden.bs.collapse', function () {
+$('.panel-collapse').on('hidden.bs.collapse', function () {
     $(this).prev('.panel-heading').find('.toggle-icon')
       .removeClass('glyphicon-minus')
       .addClass('glyphicon-plus');
   });
 
+// $('.panel-collapse').addEventListener(e, ){
+
+// }
 document.getElementById('searchBtn').addEventListener('click', function () {
     const query = document.getElementById('searchInput').value.trim().toLowerCase();
 

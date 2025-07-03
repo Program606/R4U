@@ -328,22 +328,23 @@ export const languageData = [
 ];
 
 export const categoryData = [
-  { text: "Housing", data: housingData },
-  { text: "Clothing", data: clothingData },
-  { text: "Food", data: foodData },
-  { text: "Transportation", data: transportData },
-  { text: "Income Support", data: incomeSupportData },
-  { text: "Tenants Rights / Rent Help", data: tenantsRightsData },
-  { text: "English Classes", data: englishClassesData },
-  { text: "Job Support Programs", data: jobSupportData },
-  { text: "Refugee Support", data: refugeeSupportData },
-  { text: "Pregnancy and Baby", data: pregnancyData },
-  { text: "Disability", data: disabilityData },
-  { text: "Legal Support", data: legalSupportData },
-  { text: "Spiritual / Mental Health Support", data: mentalHealthData },
-  { text: "Emergency / Crisis Support", data: crisisSupportData },
-  { text: "Contact", data: contactData }
+  { text: "Housing", data: housingData, iconName: "glyphicon-home" },
+  { text: "Clothing", data: clothingData, iconName: "glyphicon-shopping-cart" },
+  { text: "Food", data: foodData, iconName: "glyphicon-cutlery" },
+  { text: "Transportation", data: transportData, iconName: "glyphicon-road" },
+  { text: "Income Support", data: incomeSupportData, iconName: "glyphicon-usd" },
+  { text: "Tenants Rights / Rent Help", data: tenantsRightsData, iconName: " glyphicon-tent" },
+  { text: "English Classes", data: englishClassesData, iconName: "glyphicon-text-size" },
+  { text: "Job Support Programs", data: jobSupportData, iconName: "glyphicon-education" },
+  { text: "Refugee Support", data: refugeeSupportData, iconName: "glyphicon-heart" },
+  { text: "Pregnancy and Baby", data: pregnancyData, iconName: "glyphicon-baby-formula" },
+  { text: "Disability", data: disabilityData, iconName: "glyphicon-user" },
+  { text: "Legal Support", data: legalSupportData, iconName: "glyphicon-briefcase" },
+  { text: "Spiritual / Mental Health Support", data: mentalHealthData, iconName: "glyphicon-bell" },
+  { text: "Emergency / Crisis Support", data: crisisSupportData, iconName: "glyphicon-warning-sign" },
+  { text: "Contact", data: contactData, iconName: "glyphicon glyphicon-earphone" }
 ];
+
 
 
 

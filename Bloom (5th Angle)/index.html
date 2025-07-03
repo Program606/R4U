@@ -22,90 +22,11 @@
   </div>
 
   <div class="panel-group">
-    <!-- <div class="panel panel-default">
-      <div class="panel-heading" data-toggle="collapse" href="#collapseHousing">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-home category-icon"></span> 
-          <span class="categoryText" >HOUSING</span>
-          <span class="pull-right toggle-icon glyphicon glyphicon-plus"></span>
-        </h4>
-      </div>
-      <div id="collapseHousing" class="panel-collapse collapse">
-        <div class="panel-body"></div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" data-toggle="collapse" href="#collapseClothing">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-shopping-cart category-icon"></span> 
-          <span class="categoryText" >CLOTHING</span>
-          <span class="pull-right toggle-icon glyphicon glyphicon-plus"></span>
-        </h4>
-      </div>
-      <div id="collapseClothing" class="panel-collapse collapse">
-        <div class="panel-body"></div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" data-toggle="collapse" href="#collapseFood">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-cutlery category-icon"></span> 
-          <span class="categoryText" >FOOD</span>
-          <span class="pull-right toggle-icon glyphicon glyphicon-plus"></span>
-        </h4>
-      </div>
-      <div id="collapseFood" class="panel-collapse collapse">
-        <div class="panel-body"></div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading" data-toggle="collapse" href="#collapseTransport">
-        <h4 class="panel-title">
-          <span class="glyphicon glyphicon-road category-icon"></span> 
-          <span class="categoryText" >TRANSPORTATION</span>
-          <span class="pull-right toggle-icon glyphicon glyphicon-plus"></span>
-        </h4>
-      </div>
-      <div id="collapseTransport" class="panel-collapse collapse">
-        <div class="panel-body"></div>
-      </div>
-    </div> -->
-
   </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<script>
-    $('.panel-collapse').on('shown.bs.collapse', function () {
-      $(this).prev('.panel-heading').find('.toggle-icon')
-        .removeClass('glyphicon-plus')
-        .addClass('glyphicon-minus');
-    });
-  
-    $('.panel-collapse').on('hidden.bs.collapse', function () {
-      $(this).prev('.panel-heading').find('.toggle-icon')
-        .removeClass('glyphicon-minus')
-        .addClass('glyphicon-plus');
-    });
-  
-    document.getElementById('searchBtn').addEventListener('click', function () {
-      const query = document.getElementById('searchInput').value.trim().toLowerCase();
-  
-      document.querySelectorAll('.panel-collapse').forEach(panel => {
-        const bodyText = panel.querySelector('.panel-body').textContent.toLowerCase();
-        if (bodyText.includes(query)) {
-          $(panel).collapse('show');
-        } else {
-          $(panel).collapse('hide');
-        }
-      });
-    });
-  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
   <script src="./js/populate.js" type="module"></script>
   <script src="./js/index.js" type="module"></script>

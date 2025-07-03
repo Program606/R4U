@@ -24,6 +24,7 @@ function populate(){
       console.warn(`No data for category index ${i+1}`);
       continue;
     }
+
     setUpTable(categoryCards[i], entry.data);
   }
 }
@@ -47,7 +48,7 @@ function populateCategories(){
     panelHeading.appendChild(h4)
 
     let icon = document.createElement("span");
-    icon.classList = "glyphicon glyphicon-shopping-cart category-icon";
+    icon.classList = `glyphicon ${category.iconName} category-icon`;
     let categoryText = document.createElement("span");
     categoryText.classList.add("categoryText");
     categoryText.textContent = (category.text).toUpperCase();
@@ -107,7 +108,7 @@ function createTableRows(value, tableBody){
     tableResource.textContent = value.resource;
 }
 function createTableHeader(tableHead){
-    const headerRow = document.createElement("tr");
+  const headerRow = document.createElement("tr");
 
   tableColumns.forEach(tableColumn => {
     let th = document.createElement("th");
