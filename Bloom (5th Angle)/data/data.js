@@ -234,10 +234,7 @@ export const crisisSupportData = [
 
 export const contactData = [
   {
-    name: "ReachOut Contact",
-    description: "Community support and navigation assistance.",
-    contact: "contact@reachout.org",
-    resource: "https://reachout.org/connect"
+
   }
 ];
 
